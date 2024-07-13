@@ -23,15 +23,13 @@ for feature in selected_features:
 
 selected_features = ['genres','keywords','tagline','cast','director']
 # Restore the original print function
-del print
 
 # Now you can use the print function as intended
 print(selected_features)
 # Combine all the features for optimal recommendation
 combine = movies_data['genres'] + ' ' + movies_data['keywords'] + ' ' + movies_data['cast'] + ' ' + movies_data['director']+ ' ' + movies_data['tagline']
 print = combine
-# Fix the overwritten print function
-del print
+
 
 # Handle missing values in 'combine' before vectorization
 combine = combine.fillna('')  # Replace NaN with empty strings
@@ -46,11 +44,8 @@ print(featurevector)
 # Similarity score for the movie
 similarity = cosine_similarity(featurevector)
 
-del print
-
 print(similarity)
 
-del print
 print (similarity.shape) # this will give rows and columns
 
 # movie which the recommendation is for
