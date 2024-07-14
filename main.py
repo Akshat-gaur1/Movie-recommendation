@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 import numpy as np
 import difflib     #to compare the moviename from the movie input as the user my provide incorrectly
@@ -25,10 +27,10 @@ selected_features = ['genres','keywords','tagline','cast','director']
 # Restore the original print function
 
 # Now you can use the print function as intended
-print(selected_features)
+# print(selected_features)
 # Combine all the features for optimal recommendation
 combine = movies_data['genres'] + ' ' + movies_data['keywords'] + ' ' + movies_data['cast'] + ' ' + movies_data['director']+ ' ' + movies_data['tagline']
-print = combine
+# print = combine
 
 
 # Handle missing values in 'combine' before vectorization
@@ -39,21 +41,21 @@ vectorizer = TfidfVectorizer()
 featurevector = vectorizer.fit_transform(combine) # this just represent data into numerical form
 
 
-print(featurevector)
+# print(featurevector)
 
 # Similarity score for the movie
 similarity = cosine_similarity(featurevector)
 
-print(similarity)
+# print(similarity)
 
-print (similarity.shape) # this will give rows and columns
+# print (similarity.shape) # this will give rows and columns
 
 # movie which the recommendation is for
 Moviename = input('Enter the movie name: ')
 
 
 listmovietitles = movies_data['title'].tolist()
-print(listmovietitles)
+# print(listmovietitles)
 
 # Movies name
 
@@ -61,31 +63,31 @@ print(listmovietitles)
 Movies = movies_data['title']
 
 # Print the list of movies
-print(Movies)
+# print(Movies)
 
 # Searching for the most optimal recommendation for the movie
 close_match = difflib.get_close_matches(Moviename, Movies) #Movies here is the list of all the movies, so it will recommend the movie from the list
-print(close_match)
+# print(close_match)
 
 perfect_match = close_match[0] # This will suggest the first movie
-print(perfect_match)
+# print(perfect_match)
 # This is a completely optional step if only 1 movie is required
 
 # Finding the serial number of a movie by it's title
 indexofthemovie = movies_data[movies_data.title == perfect_match]['index'].values[0]
-print (indexofthemovie)
+# print (indexofthemovie)
 
 # similar movies
 similarmovies = list(enumerate(similarity[indexofthemovie])) # represent the title of movies with the similarity to the movie
 # greater similarity points equals the more like the movie is to be recommended
-print(similarmovies)
+# print(similarmovies)
 # These similarity points are based on genres, keyword, tagline, cast, director
 
 len(similarmovies)
 
 # Arranging the movies based on their similarity score
 sortedsimilarmovies = sorted(similarmovies, key = lambda x:x[1], reverse=True) # it prints the movies that are most similar to the movie
-print(sortedsimilarmovies)
+# print(sortedsimilarmovies)
 
 len(sortedsimilarmovies)
 
